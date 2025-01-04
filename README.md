@@ -1,5 +1,5 @@
 # scaling-robot
-oogle Gemini Chat History Scraper
+Google Gemini Chat History Scraper
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.0+-success.svg)](https://www.selenium.dev/)
