@@ -79,23 +79,26 @@ def scroll_and_collect_data(driver, writer):
                 continue
 
         new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
+
+        if new_height == last height:
             logging.info("Reached the bottom of the page.")
             break
         last_height = new_height
 
     return list(activity_data)  # Convert set to list before returning
 
-def save_to_csv(data):
+
+def save_to_csv(data, output_path="gemini_chat_history.csv"):
     """Save collected data to a CSV file."""
     try:
-        with open("/Users/brianbrophy/Lia/data/gemini_chat_history.csv", "w", newline="", encoding="utf-8") as csvfile:
+        with open(output_path, "w", newline="", encoding="utf-8") as csvfile:
             fieldnames = ["content"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             for content in data:
                 writer.writerow({"content": content})
-        logging.info("Data saved to gemini_chat_history.csv.")
+
+        logging.info(f"Data saved to {output_path}.")
     except Exception as e:
         logging.error(f"Error saving data to CSV: {e}")
         raise
@@ -112,7 +115,7 @@ def main():
 
         logging.info("Scrolling and collecting Gemini activity data...")
 
-        with open("/Users/brianbrophy/Lia/data/gemini_chat_history.csv", "w", newline="", encoding="utf-8") as csvfile:
+        with open("gemini_chat_history.csv", "w", newline="", encoding="utf-8") as csvfile:
             fieldnames = ["content"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
@@ -130,3 +133,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
