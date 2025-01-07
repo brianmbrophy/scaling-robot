@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, ElementClickInterceptedException, ElementNotInteractableException
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import undetected_chromedriver as uc
 
@@ -78,12 +79,14 @@ def scroll_and_collect_data(driver, writer):
                 continue
 
         new_height = driver.execute_script("return document.body.scrollHeight")
+
         if new_height == last height:
             logging.info("Reached the bottom of the page.")
             break
         last_height = new_height
 
     return list(activity_data)  # Convert set to list before returning
+
 
 def save_to_csv(data, output_path="gemini_chat_history.csv"):
     """Save collected data to a CSV file."""
@@ -94,6 +97,7 @@ def save_to_csv(data, output_path="gemini_chat_history.csv"):
             writer.writeheader()
             for content in data:
                 writer.writerow({"content": content})
+
         logging.info(f"Data saved to {output_path}.")
     except Exception as e:
         logging.error(f"Error saving data to CSV: {e}")
@@ -129,3 +133,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
